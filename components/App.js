@@ -1,5 +1,5 @@
-
 App = React.createClass({
+    
     getInitialState() {
         return {
             loading: false,
@@ -7,22 +7,21 @@ App = React.createClass({
             gif: {}
         };
     },
-
-
-    handleSearch: function(searchingText) {  
+    
+    handleSearch: function(searchingText) {
         this.setState({
-            loading: true  
+            loading: true
         });
-        this.getGif(searchingText, function(gif) {  
-            this.setState({  
-                loading: false,  
-                gif: gif,  
-                searchingText: searchingText  
+        this.getGif(searchingText, function(gif) {
+            this.setState({
+                loading: false,
+                gif: gif,
+                searchingText: searchingText
             });
         }.bind(this));
     },
-
-    getGif: function(searchingText, callback) {  
+    
+    getGif: function(searchingText, callback) {
         var url = 'https://api.giphy.com' + '/v1/gifs/random?api_key=' + 'Tn7gKxSnQnGJ43Oi7toCRDwgIejCuX7Q' + '&tag=' + searchingText;  
         var xhr = new XMLHttpRequest();
         xhr.open('GET', url);
@@ -38,7 +37,7 @@ App = React.createClass({
         };
         xhr.send();
     },
-
+    
     render: function() {
         
         var styles = {

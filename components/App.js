@@ -21,21 +21,25 @@ App = React.createClass({
         }.bind(this));
     },
     
-    getGif: function(searchingText, callback) {
-        var url = 'https://api.giphy.com' + '/v1/gifs/random?api_key=' + 'Tn7gKxSnQnGJ43Oi7toCRDwgIejCuX7Q' + '&tag=' + searchingText;  
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', url);
-        xhr.onload = function() {
-            if (xhr.status === 200) {
-                var data = JSON.parse(xhr.responseText).data;
-                var gif = {
-                    url: data.fixed_width_downsampled_url,
-                    sourceUrl: data.url
+    getGif: function(searchingText) {
+        return new Promise(
+            function (resolve, reject) {
+                var url = 'https://api.giphy.com' + '/v1/gifs/random?api_key=' + 'Tn7gKxSnQnGJ43Oi7toCRDwgIejCuX7Q' + '&tag=' + searchingText;  
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', url);
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        var data = JSON.parse(xhr.responseText).data;
+                        var gif = {
+                            url: data.fixed_width_downsampled_url,
+                            sourceUrl: data.url
+                        };
+                        resolve(gif);
+                    }
                 };
-                callback(gif);
+                xhr.send();
             }
-        };
-        xhr.send();
+        );    
     },
     
     render: function() {

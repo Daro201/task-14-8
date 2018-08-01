@@ -12,12 +12,16 @@ handleChange: function(event) {
 
     if (searchingText.length > 2) {
       this.props.onSearch(searchingText);
+    }  else {
+      return;
     }
   },
 
   handleKeyUp: function(event) {
     if ((event.keyCode === 13) && (this.state.searchingText.length > 2)){
       this.props.onSearch(this.state.searchingText);
+    }  else {
+      return;
     }
   },
 
